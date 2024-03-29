@@ -19,10 +19,22 @@ app.post('/create_item', function (req, res) {
     });
 });
 
-// Read
+// Get all
 app.get('/items', function (req, res) {
     console.log('GET items');
     databaseService.getItems(function (err, result) {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        res.json(result);
+    });
+});
+
+// Get by ID
+app.get('/item/:id', function (req, res) {
+    const { id } = req.params;
+    console.log('GET item by id');
+    databaseService.getItemById(id, function (err, result) {
         if (err) {
             return res.status(500).json({ error: err.message });
         }

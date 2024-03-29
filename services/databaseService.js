@@ -7,7 +7,7 @@ class DatabaseService {
     }
 
     initializeDatabase() {
-        this.db.run('CREATE TABLES IF NOT EXISTS items (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)');
+        this.db.run('CREATE TABLE IF NOT EXISTS items (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)');
     }
 
     createItem(name, callback) {
@@ -25,6 +25,15 @@ class DatabaseService {
                 return callback(err);
             }
             callback(null, { items: rows });
+        });
+    }
+
+    getItemById(id, callback) {
+        this.db.run('SELECT * FROM items WHERE id = ?', [id], function (err, rows) {
+            if (err) {
+                return callback(err);
+            }
+            callback(null, { id });
         });
     }
 
@@ -47,3 +56,5 @@ class DatabaseService {
     }
 
 }
+
+module.exports = new DatabaseService();
