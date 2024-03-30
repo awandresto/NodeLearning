@@ -41,7 +41,7 @@ mongoService.connectMongoDB().then(() => {
         const { name } = req.body;
         try {
             const result = await mongoService.updateItem(id, name);
-            cconsole.log('UPDATE item', result);
+            console.log('UPDATE item', result);
             res.json(result);
         } catch (err) {
             res.status(500).json({ error: err.message });
@@ -60,10 +60,18 @@ mongoService.connectMongoDB().then(() => {
         }
     });
 
+    app.use(function (req, res, next) {
+        res.status(404).json({ error: 'Not Found' });
+    });
+    
+    app.use(function (req, res, next) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    });
+
     app.listen(port, function () {
         console.log(`Server is running on http://localhost:${port}`);
     });
-    
+
 }).catch(err => {
     console.error('Failed to connect to MongoDB:', err);
     process.exit(1);
