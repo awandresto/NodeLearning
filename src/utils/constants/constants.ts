@@ -1,5 +1,7 @@
 export const ErrorMessage = {
+    errorCreatingUser: 'Error creating new user',
     errorRegisteringUser: 'Error registering new user',
+    errorUpdatingUser: 'Error updating user',
     errorInvalidCredentials: 'Invalid email or password',
 };
 
