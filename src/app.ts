@@ -11,6 +11,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import { AppDataSource } from './data-source';
 import routesAuth from './routes/auth';
+import routesUser from './routes/user';
 
 const app: Express = express();
 const port: number = parseInt(process.env.PORT || '3000', 10);
@@ -23,6 +24,7 @@ app.use(helmet());
 app.use(hpp());
 
 app.use('/auth', routesAuth);
+app.use('/users', routesUser);
 
 app.get('/', (req, res) => {
     res.send('Hello from the server!');
