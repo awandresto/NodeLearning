@@ -15,8 +15,8 @@ export const getAllUsers = async (req: Request, res: Response) => {
 
 export const createUser = async (req: Request, res: Response) => {
     try {
-        const registerUserDto: any = req.body as any;
-        const newUser = await authService.registerUser(registerUserDto);
+        const createUserDto: any = req.body as any;
+        const newUser = await userService.createUser(createUserDto);
 
         res.status(201).json({ message: 'User created successfully', user: newUser });
     } catch (err) {

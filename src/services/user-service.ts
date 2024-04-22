@@ -7,19 +7,25 @@ export const getAllUsers = async () => {
     return { users, count };
 };
 
-export const updateUser = async (id: number, registerUserData: any) => {
+export const createUser = async (createUserData: any) => {
+    const { name, email, password } = createUserData;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    return await User.save({
+        name,
+        email,
+        password: hashedPassword
+    });
+};
+
+export const updateUser = async (id: number, updateUserData: any) => {
     const user: User = await User.findOne({ where: { id } });
     if (!user) return null;
 
-    if (registerUserData.name) {
-        user.name = registerUserData.name;
-    }
-    if (registerUserData.email) {
-        user.email = registerUserData.email;
-    }
-    if (registerUserData.password) {
-        user.password = await bcrypt.hash(registerUserData.password, 10);
-    }
+    const { name, email, password } = updateUserData;
+
+    user.name = name ? name : user.name;
+    user.email = email ? email : user.email;
+    user.password = password ? await bcrypt.hash(password, 10) : user.password;
 
     return await User.save(user);
 };
