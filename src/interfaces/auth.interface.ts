@@ -4,7 +4,7 @@ import { User } from '../entities/users.entity';
 export interface RequestWithUser extends Request {
     user: User;
     cookies: any;
-    header(name: string): string | undefined;
+    header(name: string): any;
 }
 
 export interface DataStoredInToken {

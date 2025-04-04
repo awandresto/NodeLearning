@@ -36,4 +36,4 @@ export const generateRefreshToken = (user: UserPayLoad) => {
 
 export const logoutUser = async (token: string) => {
     await removeRefreshedToken(token);
-}
+};
