@@ -28,4 +28,4 @@ export const login = async (req: Request, res: Response) => {
     } else {
         res.status(400).send(ErrorMessage.errorInvalidCredentials);
     }
-}
+};

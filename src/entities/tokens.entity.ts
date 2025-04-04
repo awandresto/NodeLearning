@@ -15,7 +15,7 @@ export class Token extends BaseEntity {
 
     @Column({ type: 'int' })
         userId!: number;
-    
+
     @Column({ type: 'varchar', nullable: false })
         token!: string;
 
@@ -34,4 +34,4 @@ export class Token extends BaseEntity {
 
 export const initTokenModel = (): typeof Token => {
     return Token;
-}
+};

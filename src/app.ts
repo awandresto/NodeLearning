@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
 });
 
 AppDataSource.initialize()
-    .then(async (data) => {
+    .then(async () => {
         app.listen(port, () => {
             console.log(`Server is running on http://localhost:${port}`);
         });

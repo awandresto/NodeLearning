@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
-import { User } from '../entities/users.entity'
+import { User } from '../entities/users.entity';
+import { CreateUserDto } from 'src/dto/user.dto';
 
 export const getAllUsers = async () => {
     const [users, count] = await User.findAndCount({});
@@ -7,7 +8,7 @@ export const getAllUsers = async () => {
     return { users, count };
 };
 
-export const createUser = async (createUserData: any) => {
+export const createUser = async (createUserData: CreateUserDto) => {
     const { name, email, password } = createUserData;
     const hashedPassword = await bcrypt.hash(password, 10);
     return await User.save({

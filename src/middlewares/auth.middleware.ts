@@ -6,7 +6,8 @@ import { RequestWithUser, DataStoredInToken } from '../interfaces/auth.interface
 const authMiddleware = (): RequestHandler => {
     return async (req: RequestWithUser, res: Response, next: NextFunction) => {
         try {
-            const authorization = req.cookies['Authorization'] || (req.header('Authorization') ? req.header('Authorization').split('Bearer ')[1] : null);
+            const authorization = req.cookies['Authorization'] ||
+              (req.header('Authorization') ? (req.header('Authorization') as string).split('Bearer ')[1] : null);
 
             if (authorization) {
                 const secretKey: string = process.env.ACCESS_TOKEN_SECRET;
